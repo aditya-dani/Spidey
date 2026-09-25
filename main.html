@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To My Best Friend</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600&family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100vh;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0 0%, #f3e6ff 50%, #ffe9f2 100%);
+    }
+
+    body {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 16px;
+    }
+
+    /* ---------- Animated background ---------- */
+    .bg-anim {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(45px);
+      opacity: 0.55;
+      animation: drift 25s ease-in-out infinite;
+    }
+
+    .blob.b1 {
+      width: 300px;
+      height: 300px;
+      background: #ff9fc0;
+      top: 8%;
+      left: -6%;
+      animation-duration: 28s;
+    }
+
+    .blob.b2 {
+      width: 360px;
+      height: 360px;
+      background: #c9a8ff;
+      top: 55%;
+      left: 62%;
+      animation-duration: 34s;
+      animation-delay: -6s;
+    }
+
+    .blob.b3 {
+      width: 240px;
+      height: 240px;
+      background: #ffb6d5;
+      top: 78%;
+      left: 8%;
+      animation-duration: 22s;
+      animation-delay: -3s;
+    }
+
+    .blob.b4 {
+      width: 280px;
+      height: 280px;
+      background: #a9c1e8;
+      top: 5%;
+      left: 70%;
+      animation-duration: 30s;
+      animation-delay: -10s;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(40px, -30px) scale(1.08);
+      }
+
+      50% {
+        transform: translate(-20px, 30px) scale(0.95);
+      }
+
+      75% {
+        transform: translate(30px, 20px) scale(1.05);
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 14px;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.9;
+      }
+
+      90% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Pages container ---------- */
+    .pages-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 620px;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-wrap {
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fffafd;
+      border: 4px solid #ff9fc0;
+      border-radius: 38px;
+      padding: 52px 36px 48px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 0 #d9b8ff, 0 20px 34px rgba(255, 111, 145, 0.2);
+      margin: 0 auto;
+    }
+
+    .halftone {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 120px;
+      background-image: radial-gradient(#ff6f91 18%, transparent 20%);
+      background-size: 14px 14px;
+      opacity: 0.12;
+      z-index: -1;
+    }
+
+    .card-bow {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      z-index: 5;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+    }
+
+    /* Spidey PNG decoration slots */
+    .spidey-deco {
+      position: absolute;
+      width: 120px;
+      z-index: 4;
+      filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.18));
+      pointer-events: none;
+    }
+
+    .spidey-deco.pos-tr {
+      top: -30px;
+      right: -30px;
+    }
+
+    .spidey-deco.pos-bl {
+      bottom: -30px;
+      left: -30px;
+    }
+
+    .spidey-deco.pos-tl {
+      top: -30px;
+      left: -30px;
+    }
+
+    .spidey-deco.pos-br {
+      bottom: -30px;
+      right: -30px;
+    }
+
+    /* ---------- Side nav arrow buttons ---------- */
+    .side-nav-btn {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease;
+    }
+
+    .side-nav-btn.back {
+      background: #ffe0ec;
+      color: #d6336c;
+      box-shadow: 0 5px 0 #ffc2d9;
+    }
+
+    .side-nav-btn.next {
+      background: linear-gradient(135deg, #ff6f91, #ffb6d5);
+      color: #fff;
+      box-shadow: 0 5px 0 #e0507a;
+    }
+
+    .side-nav-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .side-nav-btn:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    .side-nav-btn.invisible {
+      visibility: hidden;
+    }
+
+    /* ---------- Page 1 styles ---------- */
+    .headline {
+      font-family: 'Dancing Script', cursive;
+      color: #ff4d7e;
+      font-size: 56px;
+      letter-spacing: 1px;
+      line-height: 1.1;
+      margin-bottom: 22px;
+      text-shadow: 3px 3px 0 rgba(255, 182, 213, 0.6);
+    }
+
+    .message {
+      color: #7a5c6e;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 370px;
+      margin: 0 auto 30px;
+    }
+
+    .come-in-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6f91, #c9a8ff);
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 1px;
+      padding: 13px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #b768e0, 0 10px 18px rgba(0, 0, 0, 0.12);
+      transition: transform 0.15s ease;
+    }
+
+    .come-in-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .come-in-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #b768e0;
+    }
+
+    /* ---------- Page 2 styles (The Note) ---------- */
+    .note-label {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: #c084fc;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .note-label::before,
+    .note-label::after {
+      content: "";
+      height: 2px;
+      width: 30px;
+      background: #c084fc;
+      opacity: 0.5;
+    }
+
+    .note-heading {
+      font-family: 'Dancing Script', cursive;
+      color: #ff4d7e;
+      font-size: 46px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-shadow: 2px 2px 0 rgba(201, 168, 255, 0.5);
+    }
+
+    .note-greeting {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      color: #c084fc;
+      margin-bottom: 20px;
+    }
+
+    .note-message {
+      color: #7a5c6e;
+      font-size: 15.5px;
+      line-height: 1.8;
+      max-width: 370px;
+      margin: 0 auto 26px;
+    }
+
+    .note-list {
+      list-style: none;
+      margin: 0 auto 22px;
+      text-align: center;
+    }
+
+    .note-list li {
+      font-size: 16px;
+      color: #5c4655;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .note-list li .heart-tiny {
+      color: #ff6f91;
+      font-size: 13px;
+      margin-right: 6px;
+    }
+
+    .note-list li.last {
+      font-family: 'Dancing Script', cursive;
+      color: #ff4d7e;
+      font-size: 32px;
+      letter-spacing: 1px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .big-heart {
+      font-size: 30px;
+    }
+
+    .lyrics-block {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 2px dashed #ffc2d9;
+    }
+
+    .lyrics-text {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      line-height: 1.6;
+      color: #c084fc;
+      font-weight: 700;
+    }
+
+    /* ---------- Page 3 styles (Little Surprise) ---------- */
+    .page3-heading {
+      font-family: 'Dancing Script', cursive;
+      color: #ff4d7e;
+      font-size: 44px;
+      letter-spacing: 1px;
+      margin-bottom: 26px;
+      text-shadow: 2px 2px 0 rgba(201, 168, 255, 0.5);
+    }
+
+    .media-frame {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 9/16;
+      margin: 0 auto;
+      background: #111;
+      border: 4px solid #c9a8ff;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 0 #ff9fc0;
+    }
+
+    .media-frame video,
+    .media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* ---------- Page 4 styles (Songs) ---------- */
+    .page4-heading {
+      font-family: 'Caveat', cursive;
+      color: #ff4d7e;
+      font-size: 38px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .album-art {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 16px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #ff6f91, #c9a8ff);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      color: #fff;
+      box-shadow: 0 8px 0 #ffd1e3, 0 14px 22px rgba(0, 0, 0, 0.12);
+      transition: background-image 0.3s ease;
+    }
+
+    .play-status {
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: #ff6f91;
+      margin-bottom: 6px;
+    }
+
+    .song-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #5c4655;
+      margin-bottom: 16px;
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: #ffe0ec;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff6f91, #c9a8ff);
+      border-radius: 10px;
+    }
+
+    .time-label {
+      font-size: 11px;
+      color: #b599c2;
+      min-width: 34px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .ctrl-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: #c084fc;
+      transition: transform 0.15s ease;
+    }
+
+    .ctrl-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .play-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6f91, #ffb6d5);
+      color: #fff;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 0 #e0507a;
+    }
+
+    .song-list {
+      text-align: left;
+      max-height: 140px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      padding-right: 4px;
+    }
+
+    .song-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      color: #7a5c6e;
+      cursor: pointer;
+    }
+
+    .song-item.playing {
+      background: #ffe0ec;
+      color: #ff4d7e;
+      font-weight: 600;
+    }
+
+    .song-item .track-num {
+      width: 18px;
+      font-size: 12px;
+      color: #d9b8e8;
+    }
+
+    /* ---------- Page 5 styles (Closing) ---------- */
+    .p5-headline {
+      font-family: 'Dancing Script', cursive;
+      color: #ff4d7e;
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .p5-badge {
+      display: inline-block;
+      background: #c084fc;
+      color: #fff;
+      font-family: 'Bangers', cursive;
+      font-size: 14px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      transform: rotate(-6deg);
+      margin: 10px 0 6px;
+      box-shadow: 0 3px 0 #9c5fd8;
+    }
+
+    .p5-punchline {
+      font-family: 'Bangers', cursive;
+      color: #5c4655;
+      font-size: 60px;
+      letter-spacing: 2px;
+      margin: 8px 0 22px;
+      text-shadow: 4px 4px 0 #ffb6d5;
+    }
+
+    .p5-message {
+      color: #7a5c6e;
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 360px;
+      margin: 0 auto 10px;
+    }
+
+    .p5-promise {
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      font-weight: 700;
+      color: #c084fc;
+      margin-top: 14px;
+    }
+
+    /* =========================================================
+     MOBILE RESPONSIVE STYLES
+     ========================================================= */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 30px;
+      }
+
+      .page {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .side-nav-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+        order: 3;
+      }
+
+      .card-wrap {
+        order: 1;
+        max-width: 100%;
+      }
+
+      .card {
+        padding: 44px 22px 38px;
+        border-radius: 30px;
+      }
+
+      .page.active {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .page.active .card-wrap {
+        width: 100%;
+        order: 1;
+      }
+
+      .page.active .side-nav-btn.back {
+        order: 2;
+      }
+
+      .page.active .side-nav-btn.next {
+        order: 3;
+      }
+
+      .spidey-deco {
+        width: 75px;
+      }
+
+      .spidey-deco.pos-tr {
+        top: -20px;
+        right: -14px;
+      }
+
+      .spidey-deco.pos-bl {
+        bottom: -20px;
+        left: -14px;
+      }
+
+      .spidey-deco.pos-tl {
+        top: -20px;
+        left: -14px;
+      }
+
+      .spidey-deco.pos-br {
+        bottom: -20px;
+        right: -14px;
+      }
+
+      .headline {
+        font-size: 42px;
+      }
+
+      .note-heading {
+        font-size: 36px;
+      }
+
+      .page3-heading {
+        font-size: 34px;
+      }
+
+      .p5-punchline {
+        font-size: 46px;
+      }
+
+      .p5-headline {
+        font-size: 32px;
+      }
+
+      .message,
+      .note-message,
+      .p5-message {
+        font-size: 14.5px;
+        max-width: 100%;
+      }
+
+      .lyrics-text {
+        font-size: 19px;
+      }
+
+      .album-art {
+        width: 150px;
+        height: 150px;
+      }
+
+      .come-in-btn {
+        font-size: 14px;
+        padding: 12px 28px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .headline {
+        font-size: 36px;
+      }
+
+      .p5-punchline {
+        font-size: 38px;
+      }
+
+      .spidey-deco {
+        width: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-anim" id="bgAnim">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+  </div>
+
+  <div class="pages-container">
+
+    <!-- ================= PAGE 1 (Hero) ================= -->
+    <div class="page active" id="page1">
+      <button class="side-nav-btn back invisible">←</button>
+      <div class="card-wrap">
+        <div class="card">
+          <div class="halftone"></div>
+          <div class="card-bow">🎀</div>
+
+          <img class="spidey-deco pos-tr" src="images/spidey1.png" alt="">
+
+          <div class="headline">Heyy Jamuna</div>
+
+          <p class="message">
+            Sometimes I piss you off and I hate myself when I do it.
+            You mean way more to me than any disagreement ever could.
+            So I made something to steal at least one smile from you.
+          </p>
+
+          <button class="come-in-btn" onclick="goToPage(2)">Come In →</button>
+        </div>
+      </div>
+      <button class="side-nav-btn next invisible">→</button>
+    </div>
+
+    <!-- ================= PAGE 2 (The Note) ================= -->
+    <div class="page" id="page2">
+      <button class="side-nav-btn back" onclick="goToPage(1)">←</button>
+      <div class="card-wrap">
+        <div class="card">
+          <div class="halftone"></div>
+          <div class="card-bow">🎀</div>
+
+          <img class="spidey-deco pos-bl" src="images/spidey2.png" alt="">
+
+          <div class="note-label">✦ A NOTE ✦</div>
+          <div class="note-heading">Just for you</div>
+          <div class="note-greeting">To Jamuna,</div>
+
+          <p class="note-message">
+            I wanted you to know that I'm so grateful to have met such an amazing
+            person like you, you mean a lot to me.
+          </p>
+
+          <ul class="note-list">
+            <li><span class="heart-tiny">❤</span>She is Pretty</li>
+            <li><span class="heart-tiny">❤</span>She is Worth it</li>
+            <li><span class="heart-tiny">❤</span>She is Rare</li>
+            <li><span class="heart-tiny">❤</span>She is a Diamond</li>
+            <li class="last"><span class="big-heart">💗</span>She is You</li>
+          </ul>
+
+          <div class="lyrics-block">
+            <p class="lyrics-text">
+              Bin tere nahiyon guzaara mera<br>
+              Bas ik tuhiyon sahara mera<br>
+              Kagaz ki kashti mein behta raha<br>
+              Tujhpe aake kinaara mila
+            </p>
+          </div>
+        </div>
+      </div>
+      <button class="side-nav-btn next" onclick="goToPage(3)">→</button>
+    </div>
+
+    <!-- ================= PAGE 3 (Little Surprise) ================= -->
+    <div class="page" id="page3">
+      <button class="side-nav-btn back" onclick="goToPage(2)">←</button>
+      <div class="card-wrap">
+        <div class="card">
+          <div class="halftone"></div>
+          <div class="card-bow">🎀</div>
+
+          <img class="spidey-deco pos-tr" src="images/spidey3.png" alt="">
+
+          <div class="page3-heading">Little Surprise</div>
+
+          <div class="media-frame">
+            <video id="surpriseVideo" controls loop playsinline>
+              <source src="songs/video.mp4" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+      <button class="side-nav-btn next" onclick="goToPage(4)">→</button>
+    </div>
+
+    <!-- ================= PAGE 4 (Songs) ================= -->
+    <div class="page" id="page4">
+      <button class="side-nav-btn back" onclick="goToPage(3)">←</button>
+      <div class="card-wrap">
+        <div class="card">
+          <div class="halftone"></div>
+          <div class="card-bow">🎀</div>
+
+          <img class="spidey-deco pos-bl" src="images/spidey4.png" alt="">
+
+          <div class="page4-heading">Songs That You Like 💗</div>
+
+          <div class="album-art">🎵</div>
+
+          <div class="play-status" id="playStatus">PAUSED</div>
+          <div class="song-title" id="currentSongTitle">Song Title Here</div>
+
+          <div class="progress-wrap">
+            <span class="time-label" id="currentTime">0:00</span>
+            <div class="progress-bar" id="progressBar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="time-label" id="totalTime">0:00</span>
+          </div>
+
+          <div class="controls">
+            <button class="ctrl-btn" onclick="prevSong()">⏮</button>
+            <button class="ctrl-btn play-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
+            <button class="ctrl-btn" onclick="nextSong()">⏭</button>
+          </div>
+
+          <div class="song-list" id="songList">
+            <!-- Song items generated by JS below -->
+          </div>
+
+          <audio id="audioPlayer"></audio>
+        </div>
+      </div>
+      <button class="side-nav-btn next" onclick="goToPage(5)">→</button>
+    </div>
+
+    <!-- ================= PAGE 5 (Closing) ================= -->
+    <div class="page" id="page5">
+      <button class="side-nav-btn back" onclick="goToPage(4)">←</button>
+      <div class="card-wrap">
+        <div class="card">
+          <div class="halftone"></div>
+          <div class="card-bow">🎀</div>
+
+          <img class="spidey-deco pos-tr" src="images/spidey5.png" alt="">
+          <img class="spidey-deco pos-bl" src="images/spidey6.png" alt="">
+
+          <div class="p5-headline">I'm so</div>
+          <div class="p5-badge">SO SO SO</div>
+          <div class="p5-punchline">SORRY 🕸️</div>
+          <div class="p5-promise">It won't happen again 💙</div>
+
+          <p class="p5-message">
+            In the endless void of time, every moment reminded me how much I missed you
+          </p>
+
+        </div>
+      </div>
+      <button class="side-nav-btn next invisible">→</button>
+    </div>
+
+  </div>
+
+  <script>
+    function goToPage(num) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+      // Pause the surprise video whenever we leave page 3
+      const video = document.getElementById('surpriseVideo');
+      if (video) video.pause();
+
+      document.getElementById('page' + num).classList.add('active');
+
+      // Restart & play the video (with sound) whenever we arrive on page 3
+      // This works because it's triggered directly from a button click (user gesture)
+      if (num === 3 && video) {
+        video.currentTime = 0;
+        video.play().catch(err => {
+          console.log('Video play blocked, needs manual tap:', err);
+        });
+      }
+    }
+
+    /* ---------- Background sparkles ---------- */
+    const bg = document.getElementById('bgAnim');
+    const symbols = ['✦', '🕷️', '🕸️', '💥', '❤️', '💗', '✨'];
+
+    function createSparkle() {
+      const el = document.createElement('div');
+      el.className = 'sparkle';
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = (12 + Math.random() * 16) + 'px';
+      const duration = 10 + Math.random() * 10;
+      el.style.animationDuration = duration + 's';
+      el.style.bottom = '-20px';
+      bg.appendChild(el);
+      setTimeout(() => el.remove(), duration * 1000);
+    }
+    setInterval(createSparkle, 700);
+
+    /* ---------- Music player ---------- */
+    const songs = [
+      { file: "songs/Bairan.mp3", title: "Bairan" },
+      { file: "songs/KALYANI.mp3", title: "KALYANI" },
+      { file: "songs/Marali Mareyagi.mp3", title: "Marali Mareyagi" },
+      { file: "songs/Tamil Love Mix.mp3", title: "Tamil Love Mix" }
+    ];
+
+    let currentSongIndex = 0;
+    const audio = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playStatus = document.getElementById('playStatus');
+    const currentSongTitle = document.getElementById('currentSongTitle');
+    const progressFill = document.getElementById('progressFill');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const songListEl = document.getElementById('songList');
+    const albumArtEl = document.querySelector('.album-art');
+
+    function renderSongList() {
+      songListEl.innerHTML = '';
+      songs.forEach((song, i) => {
+        const item = document.createElement('div');
+        item.className = 'song-item' + (i === currentSongIndex ? ' playing' : '');
+        item.innerHTML = `<span class="track-num">${i + 1}</span><span>${song.title}</span>`;
+        item.onclick = () => loadSong(i, true);
+        songListEl.appendChild(item);
+      });
+    }
+
+    function loadSong(index, autoplay) {
+      currentSongIndex = index;
+      audio.src = songs[index].file;
+      currentSongTitle.textContent = songs[index].title;
+      renderSongList();
+
+      albumArtEl.style.backgroundImage = 'none';
+      albumArtEl.textContent = '🎵';
+
+      jsmediatags.read(songs[index].file, {
+        onSuccess: function (tag) {
+          const picture = tag.tags.picture;
+          if (picture) {
+            let base64String = "";
+            for (let i = 0; i < picture.data.length; i++) {
+              base64String += String.fromCharCode(picture.data[i]);
+            }
+            const imageUri = `data:${picture.format};base64,${window.btoa(base64String)}`;
+            albumArtEl.style.backgroundImage = `url(${imageUri})`;
+            albumArtEl.textContent = '';
+          }
+        },
+        onError: function (error) {
+          console.log('No album art found:', error.type, error.info);
+        }
+      });
+
+      if (autoplay) {
+        audio.play();
+      }
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    function nextSong() {
+      const wasPlaying = !audio.paused;
+      loadSong((currentSongIndex + 1) % songs.length, wasPlaying);
+    }
+
+    function prevSong() {
+      const wasPlaying = !audio.paused;
+      loadSong((currentSongIndex - 1 + songs.length) % songs.length, wasPlaying);
+    }
+
+    audio.addEventListener('play', () => {
+      playStatus.textContent = 'PLAYING';
+      playPauseBtn.textContent = '⏸';
+    });
+    audio.addEventListener('pause', () => {
+      playStatus.textContent = 'PAUSED';
+      playPauseBtn.textContent = '▶';
+    });
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        progressFill.style.width = (audio.currentTime / audio.duration) * 100 + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+      }
+    });
+    audio.addEventListener('loadedmetadata', () => {
+      totalTimeEl.textContent = formatTime(audio.duration);
+    });
+    audio.addEventListener('ended', () => nextSong());
+
+    progressBar.addEventListener('click', (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = percent * audio.duration;
+    });
+
+    function formatTime(sec) {
+      if (isNaN(sec)) return "0:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    // Initialize song list on load
+    loadSong(0, false);
+  </script>
+
+</body>
+
+</html>
